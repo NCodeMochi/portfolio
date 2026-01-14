@@ -1,0 +1,75 @@
+[
+  {
+    "id": "1",
+    "company": "Adaca",
+    "companyUrl": "https://adaca.com",
+    "position": "Backend Developer",
+    "location": "Sydney, AU",
+    "startDate": "2022-11",
+    "isCurrent": true,
+    "description": "Led the development of backend services for legacy applications, including migration to modern architectures and implementation of new features.",
+    "keyPoints": [
+      "Optimized slow-performing database queries, improving overall system performance by up to 70%.",
+      "Managed and maintained legacy WordPress codebases, providing updates, fixes, and feature enhancements.",
+      "Migrated a legacy WordPress e-commerce platform to Shopify using Shopify Headless + Next.js architecture."
+    ],
+    "technologies": [
+      "TypeScript",
+      "Express.js",
+      "Node.js",
+      "Next.js",
+      "Tailwind",
+      "WordPress",
+      "Shopify",
+      "PostgreSQL",
+      "MySQL",
+      "Bitbucket"
+    ]
+  },
+  {
+    "id": "2",
+    "company": "Code Disruptors Inc.",
+    "position": "Junior Full Stack Developer",
+    "location": "Laguna, PH",
+    "startDate": "2022-01",
+    "endDate": "2022-10",
+    "isCurrent": false,
+    "description": "Exposed to multiple codebases and development environments, quickly adapting to existing architectures, coding standards, and workflows to deliver features and fixes efficiently.",
+    "keyPoints": [
+      "Designed and developed frontend architecture and REST APIs, ensuring clean, scalable codebases across multiple projects.",
+      "Managed cloud infrastructure and performed database operations, including optimization, backups, and migration tasks.",
+      "Supported multiple clients simultaneously by maintaining legacy applications and providing technical troubleshooting and enhancements. "
+    ],
+    "technologies": [
+      "React.js",
+      "Express.js",
+      "Node.js",
+      "Ant Design",
+      "MySQL",
+      "AWS Lambda",
+      "AWS DynamoDB",
+      "Git"
+    ]
+  },
+  {
+    "id": "3",
+    "company": "Self-employed",
+    "position": "Freelance Web Developer",
+    "location": "Remote",
+    "startDate": "2018-01",
+    "isCurrent": false,
+    "description": "Delivered end-to-end web solutions for various clients, translating business workflows into scalable applications. Owned development, deployment, and CI/CD pipelines, while improving system performance, reliability, and long-term maintainability.",
+    "keyPoints": [
+      "Collaborated closely with clients to understand their technical workflows and deliver tailored, high-impact solutions.",
+      "Led end-to-end development of the application and implemented a CI/CD pipeline to enable seamless, zero-downtime deployments.",
+      "Identified and resolved critical system issues, improving performance, reliability, and overall feature scalability."
+    ],
+    "technologies": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Vue.js",
+      "WordPress"
+    ]
+  }
+]

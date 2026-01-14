@@ -1,0 +1,190 @@
+{
+  "technologies": [
+    {
+      "category": "frontend",
+      "name": "React",
+      "icon": "react",
+      "proficiency": "core"
+    },
+    {
+      "category": "frontend",
+      "name": "Next.js",
+      "icon": "next",
+      "proficiency": "core"
+    },
+    {
+      "category": "frontend",
+      "name": "TypeScript",
+      "icon": "typescript",
+      "proficiency": "core"
+    },
+    {
+      "category": "frontend",
+      "name": "JavaScript",
+      "icon": "javascript",
+      "proficiency": "core"
+    },
+    {
+      "category": "frontend",
+      "name": "Tailwind CSS",
+      "icon": "tailwind",
+      "proficiency": "core"
+    },
+    {
+      "category": "frontend",
+      "name": "Material UI",
+      "icon": "mui",
+      "proficiency": "familiar"
+    },
+    {
+      "category": "backend",
+      "name": "Node.js",
+      "icon": "node",
+      "proficiency": "core"
+    },
+    {
+      "category": "backend",
+      "name": "Express.js",
+      "icon": "express",
+      "proficiency": "familiar"
+    },
+    {
+      "category": "backend",
+      "name": "Nest.js",
+      "icon": "nest",
+      "proficiency": "exploring"
+    },
+    {
+      "category": "backend",
+      "name": "PHP",
+      "icon": "php",
+      "proficiency": "familiar"
+    },
+    {
+      "category": "backend",
+      "name": "CodeIgniter",
+      "icon": "codeigniter",
+      "proficiency": "familiar"
+    },
+    {
+      "category": "backend",
+      "name": "Slim Framework",
+      "icon": "slim",
+      "proficiency": "familiar"
+    },
+    {
+      "category": "database",
+      "name": "MySQL",
+      "icon": "mysql",
+      "proficiency": "familiar"
+    },
+    {
+      "category": "database",
+      "name": "PostgreSQL",
+      "icon": "postgres",
+      "proficiency": "core"
+    },
+    {
+      "category": "database",
+      "name": "Redis",
+      "icon": "redis",
+      "proficiency": "familiar"
+    },
+    {
+      "category": "cloud",
+      "name": "Linode",
+      "icon": "linode",
+      "proficiency": "core"
+    },
+    {
+      "category": "cloud",
+      "name": "Docker",
+      "icon": "docker",
+      "proficiency": "familiar"
+    },
+    {
+      "category": "tools",
+      "name": "Git",
+      "icon": "git",
+      "proficiency": "core"
+    },
+    {
+      "category": "tools",
+      "name": "GraphQL",
+      "icon": "graphql",
+      "proficiency": "familiar"
+    },
+    {
+      "category": "backend",
+      "name": "AWS Lambda",
+      "icon": "lambda",
+      "proficiency": "familiar"
+    },
+    {
+      "category": "database",
+      "name": "DynamoDB",
+      "icon": "dynamodb",
+      "proficiency": "familiar"
+    },
+    {
+      "category": "backend",
+      "name": "Kysely",
+      "icon": "kysely",
+      "proficiency": "core"
+    },
+    {
+      "category": "database",
+      "name": "MongoDB",
+      "icon": "mongodb",
+      "proficiency": "familiar"
+    },
+    {
+      "category": "frontend",
+      "name": "Boostrap",
+      "icon": "bootstrap",
+      "proficiency": "familiar"
+    },
+    {
+      "category": "tools",
+      "name": "Bitbucket",
+      "icon": "bitbucket",
+      "proficiency": "familiar"
+    },
+    {
+      "category": "backend",
+      "name": "Wordpress",
+      "icon": "wordpress",
+      "proficiency": "familiar"
+    },
+    {
+      "category": "backend",
+      "name": "Shopify",
+      "icon": "shopify",
+      "proficiency": "familiar"
+    },
+    {
+      "category": "backend",
+      "name": "Python",
+      "icon": "python",
+      "proficiency": "familiar"
+    },
+    {
+      "category": "backend",
+      "name": "Adonis.js",
+      "icon": "adonis",
+      "proficiency": "familiar"
+    },
+    {
+      "category": "frontend",
+      "name": "Svelte",
+      "icon": "svelte",
+      "proficiency": "exploring"
+    },
+    {
+      "category": "tools",
+      "name": "AI/ML",
+      "icon": "openai",
+      "proficiency": "exploring"
+    }
+  ]
+}

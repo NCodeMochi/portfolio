@@ -1,0 +1,30 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.3.11/schema.json",
+  "files": {
+    "includes": [
+      "**/*.{ts,tsx,js,jsx}",
+      "!!**/.next",
+      "!!**/node_modules",
+      "!!**/.pnp",
+      "!!**/.yarn",
+      "!!**/coverage",
+      "!!**/out",
+      "!!**/build"
+    ]
+  },
+  "linter": {
+    "domains": {
+      "next": "recommended",
+      "project": "recommended"
+    }
+  },
+  "formatter": {
+    "lineWidth": 120,
+    "indentStyle": "space"
+  },
+  "assist": {
+    "actions": {
+      "recommended": true
+    }
+  }
+}
