@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Nunito, Nunito_Sans } from "next/font/google";
+import { Doto } from "next/font/google";
+
 import "./globals.css";
 
 const nunitoSans = Nunito({
@@ -29,3 +31,8 @@ export default function RootLayout({
     </html>
   );
 }
+
+export const doto = Doto({
+  subsets: ["latin"],
+  weight: ["400", "700", "900"],
+});

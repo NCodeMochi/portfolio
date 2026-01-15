@@ -1,13 +1,13 @@
 {
-  "github": "https://github.com/Ming-desu",
-  "linkedin": "https://linkedin.com/in/ming-desu",
-  "twitter": "https://x.com/gattofiga",
+  "github": "https://github.com/NCodeMochi",
+  "linkedin": "https://www.linkedin.com/in/neilmorales/",
+  "facebook": "https://www.facebook.com/garlictoonion/",
   "email": "neilirvinemorales@gmail.com",
-  "name": "Neil Irvine Morales",
+  "name": "Neil Morales",
   "title": "Full Stack Web Developer",
   "location": "Laguna, Philippines",
   "availableForWork": true,
-  "bio": "I build scalable digital products by combining clean design with reliable engineering. Passionate about turning real-world problems into thoughtful, high-impact solutions.",
+  "bio": "Full Stack Developer specializing in the modernization of enterprise banking systems. I build high-availability APIs and scalable architectures, turning complex legacy challenges into high-performance, design-driven solutions.",
   "resumeUrl": "https://google.com",
-  "avatarUrl": "/ai-portrait.png"
+  "avatarUrl": "/portfolio/neil-portrait.png"
 }

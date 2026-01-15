@@ -65,13 +65,23 @@ export function Navbar() {
       <nav className="mx-auto flex h-20 max-w-5xl items-center justify-between px-6">
         <Link
           href="/"
-          className="group flex items-center gap-2.5 transition-transform active:scale-95"
+          className="group flex items-center gap-2 transition-all duration-300 ease-in-out"
         >
-          <ReactSVG
-            src="/logo-minimal.svg"
-            className="[&>div>svg]:size-8 dark:fill-white"
+          <img 
+            src="/portfolio/simple-logo.svg" 
+            alt="neil.dev logo"
+            className="size-10 object-contain" 
           />
-          <span className="font-black">neil.dev</span>
+          
+          <div className="flex flex-col leading-none">
+            <span className="text-sm font-black tracking-tight uppercase">
+              neil.dev
+            </span>
+            <span className="text-[10px] font-medium text-muted-foreground">
+              Full Stack Developer
+            </span>
+          </div>
+
         </Link>
 
         {/* Desktop Navigation */}

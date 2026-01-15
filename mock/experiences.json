@@ -1,17 +1,22 @@
 [
   {
     "id": "1",
-    "company": "Adaca",
-    "companyUrl": "https://adaca.com",
-    "position": "Backend Developer",
-    "location": "Sydney, AU",
-    "startDate": "2022-11",
+    "company": "CARD MRI",
+    "companyUrl": "https://cardmri.com",
+    "position": "Application Developer (Full Stack)",
+    "location": "San Pablo Laguna, PH",
+    "startDate": "2024-11",
     "isCurrent": true,
-    "description": "Led the development of backend services for legacy applications, including migration to modern architectures and implementation of new features.",
+    "description": "Full stack developer supporting enterprise banking systems for CARD Bank, CARD SME Bank, and CARD RBI",
     "keyPoints": [
-      "Optimized slow-performing database queries, improving overall system performance by up to 70%.",
-      "Managed and maintained legacy WordPress codebases, providing updates, fixes, and feature enhancements.",
-      "Migrated a legacy WordPress e-commerce platform to Shopify using Shopify Headless + Next.js architecture."
+        "Develop and maintain Spring Boot–based Java applications for web platforms and mobile APIs.",
+        "Migrate legacy databases and applications into modern architectures and technologies.",
+        "Design, implement, and maintain Mobile APIs and Open APIs used by third-party services.",
+        "Work with APIs that share a common core but implement institution-specific business logic and functions.",
+        "Support Web APIs as needed, with primary focus on mobile-facing services.",
+        "Use SQL Server Management",
+        "Studio (SSMS) for legacy database operations and data analysis.",
+        "Actively involved in migrating legacy databases to PostgreSQL and transitioning backend services from Java Spring Boot to Go (Golang) while continuing to enhance existing systems."
     ],
     "technologies": [
       "TypeScript",
@@ -28,17 +33,19 @@
   },
   {
     "id": "2",
-    "company": "Code Disruptors Inc.",
-    "position": "Junior Full Stack Developer",
-    "location": "Laguna, PH",
-    "startDate": "2022-01",
-    "endDate": "2022-10",
+    "company": "Ebizolution Inc",
+    "companyUrl": "https://www.ebizolution.com",
+    "position": "Service Engineer",
+    "location": "Pasay City, Metro Manila, PH",
+    "startDate": "2023-08",
+    "endDate": "2024-03",
     "isCurrent": false,
-    "description": "Exposed to multiple codebases and development environments, quickly adapting to existing architectures, coding standards, and workflows to deliver features and fixes efficiently.",
+    "description": "Optimized daily service operations by strategically managing and prioritizing technical appointments, ensuring high-priority issues were resolved with minimal downtime",
     "keyPoints": [
-      "Designed and developed frontend architecture and REST APIs, ensuring clean, scalable codebases across multiple projects.",
-      "Managed cloud infrastructure and performed database operations, including optimization, backups, and migration tasks.",
-      "Supported multiple clients simultaneously by maintaining legacy applications and providing technical troubleshooting and enhancements. "
+      "Managed and prioritized technical service appointments to support daily operations.",
+      "Performed troubleshooting, repairs, and preventive maintenance to ensure optimal system performance.",
+      "Configured and updated equipment settings to improve reliability and efficiency.", 
+      "Applied best practices while operating within prescribed service and safety standards."
     ],
     "technologies": [
       "React.js",
@@ -51,8 +58,32 @@
       "Git"
     ]
   },
-  {
+   {
     "id": "3",
+    "company": "Simplevia",
+    "companyUrl": "https://www.simplevia.com",
+    "position": "Full Stack Developer",
+    "location": "Remote",
+    "startDate": "2023-03",
+    "endDate": "2023-05",
+    "isCurrent": false,
+    "description": "Streamlined application workflows by seamlessly integrating diverse internal and external data sources, improving data consistency across the platform.",
+    "keyPoints": [
+      "Translated functional requirements into scalable application components.",
+      "Developed and enhanced backend services using Java and related technologies.",
+      "Integrated internal and external data sources to support application workflows.",
+      "Debugged and resolved software issues to improve performance, security, and usability."
+    ],
+    "technologies": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Vue.js",
+      "WordPress"
+    ]
+  },
+  {
+    "id": "4",
     "company": "Self-employed",
     "position": "Freelance Web Developer",
     "location": "Remote",

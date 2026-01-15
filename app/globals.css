@@ -1,8 +1,20 @@
+
 @import "tailwindcss";
 @import "tw-animate-css";
 
+
 html {
   scroll-behavior: smooth;
+}
+.dot-matrix {
+  font-family: "Doto", monospace;
+  letter-spacing: 0.25em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.dot-matrix-lg {
+  font-size: clamp(2.8rem, 7vw, 5rem);
 }
 
 @custom-variant dark (&:is(.dark *));
