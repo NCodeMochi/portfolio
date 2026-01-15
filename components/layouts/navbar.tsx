@@ -8,10 +8,10 @@ import { useScrollSpy } from "@/hooks/use-scrollspy";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { id: "home", label: "Home", href: "#home" },
-  { id: "projects", label: "Projects", href: "#projects" },
-  { id: "experience", label: "Experience", href: "#experience" },
-  { id: "contact", label: "Contact", href: "#contact" },
+  { id: "home", label: "Home" },
+  { id: "projects", label: "Projects" },
+  { id: "experience", label: "Experience" },
+  { id: "contact", label: "Contact" },
 ];
 
 export function Navbar() {
@@ -21,9 +21,13 @@ export function Navbar() {
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
-    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+
     const initialTheme = savedTheme || systemTheme;
     setTheme(initialTheme);
+
     if (initialTheme === "dark") {
       document.documentElement.classList.add("dark");
     }
@@ -33,40 +37,63 @@ export function Navbar() {
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
     localStorage.setItem("theme", newTheme);
-    if (newTheme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
+
+    document.documentElement.classList.toggle("dark", newTheme === "dark");
+  };
+
+  /** 🔥 ONE scroll handler for ALL nav links */
+  const handleNavClick = (
+    e: React.MouseEvent,
+    id: string,
+    closeMobile = false
+  ) => {
+    e.preventDefault();
+
+    if (closeMobile) setMobileMenuOpen(false);
+
+    const target = document.getElementById(id);
+    if (!target) return;
+
+    target.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
   };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-zinc-100 bg-white/80 backdrop-blur-xl dark:border-zinc-800 dark:bg-zinc-950/80">
       <nav className="mx-auto flex h-20 max-w-5xl items-center justify-between px-6">
-        <Link href="/" className="group flex items-center gap-2.5 transition-transform active:scale-95">
-          <ReactSVG src="/logo-minimal.svg" className="[&>div>svg]:size-8 dark:fill-white" />
-          <span className="font-black">ming.dev</span>
+        <Link
+          href="/"
+          className="group flex items-center gap-2.5 transition-transform active:scale-95"
+        >
+          <ReactSVG
+            src="/logo-minimal.svg"
+            className="[&>div>svg]:size-8 dark:fill-white"
+          />
+          <span className="font-black">neil.dev</span>
         </Link>
 
         {/* Desktop Navigation */}
         <div className="hidden items-center gap-10 md:flex">
-          {navLinks.map((link) => {
-            return (
-              <Link
-                key={link.label}
-                href={link.href}
-                className={cn(
-                  "text-xs font-bold uppercase tracking-widest transition-all hover:text-zinc-900 dark:hover:text-white text-zinc-400 dark:text-zinc-500",
-                  activeSection === link.id && "text-zinc-900 dark:text-white",
-                )}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
+          {navLinks.map((link) => (
+            <Link
+              key={link.id}
+              href={`#${link.id}`}
+              onClick={(e) => handleNavClick(e, link.id)}
+              className={cn(
+                "text-xs font-bold uppercase tracking-widest transition-all duration-300",
+                activeSection === link.id
+                  ? "text-zinc-900 dark:text-white"
+                  : "text-zinc-400 dark:text-zinc-500"
+              )}
+            >
+              {link.label}
+            </Link>
+          ))}
         </div>
 
-        {/* Theme Toggle Button */}
+        {/* Actions */}
         <div className="flex items-center gap-4">
           <button
             type="button"
@@ -74,42 +101,54 @@ export function Navbar() {
             className="flex h-10 w-10 items-center justify-center rounded-xl border border-zinc-100 bg-white text-zinc-900 shadow-sm transition-all hover:border-zinc-300 active:scale-90 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:border-zinc-700"
             aria-label="Toggle theme"
           >
-            {theme === "light" ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
+            {theme === "light" ? (
+              <Moon className="h-5 w-5" />
+            ) : (
+              <Sun className="h-5 w-5" />
+            )}
           </button>
 
-          {/* Mobile Toggle */}
           <button
             type="button"
             className="flex h-10 w-10 items-center justify-center rounded-xl border border-zinc-100 bg-white text-zinc-900 md:hidden active:scale-90 transition-all dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-100"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
           >
-            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {mobileMenuOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
           </button>
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu */}
       <div
-        className={`fixed inset-0 top-20 z-40 bg-white/60 backdrop-blur-xl transition-all duration-300 dark:bg-zinc-950/60 md:hidden ${
-          mobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none translate-y-2"
-        }`}
+        className={cn(
+          "fixed inset-0 top-20 z-40 bg-white/60 backdrop-blur-xl transition-all duration-300 dark:bg-zinc-950/60 md:hidden",
+          mobileMenuOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none translate-y-2"
+        )}
       >
         <div className="flex flex-col gap-2 p-6">
-          {navLinks.map((link) => {
-            return (
-              <Link
-                key={link.id}
-                href={link.href}
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                }}
-                className="flex items-center justify-between rounded-2xl px-6 py-4 text-sm font-bold transition-all"
-              >
-                {link.label}
-              </Link>
-            );
-          })}
+          {navLinks.map((link) => (
+            <Link
+              key={link.id}
+              href={`#${link.id}`}
+              onClick={(e) =>
+                handleNavClick(e, link.id, true)
+              }
+              className={cn(
+                "flex items-center justify-between rounded-2xl px-6 py-4 text-sm font-bold transition-all",
+                activeSection === link.id
+                  ? "bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-white"
+                  : "text-zinc-500"
+              )}
+            >
+              {link.label}
+            </Link>
+          ))}
         </div>
       </div>
     </header>

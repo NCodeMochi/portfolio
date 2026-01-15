@@ -50,6 +50,10 @@ html {
   --radius-4xl: calc(var(--radius) + 16px);
 }
 
+#home, #projects, #experience, #contact {
+  scroll-margin-top: 80px;
+}
+
 :root {
   --radius: 0.625rem;
   --card: oklch(1 0 0);

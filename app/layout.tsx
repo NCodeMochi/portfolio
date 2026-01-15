@@ -13,7 +13,7 @@ const nunitoMono = Nunito_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Ming.dev | Portfolio",
+  title: "Neil.dev | Portfolio",
   description:
     "Professional web developer portfolio highlighting web apps, mobile applications, and modern UI/UX design. Browse projects and connect for freelance or contract work.",
 };
