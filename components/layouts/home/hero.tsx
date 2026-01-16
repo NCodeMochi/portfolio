@@ -33,16 +33,16 @@ export function HeroSection() {
         <div className="flex flex-col items-start gap-12 lg:flex-row lg:items-center lg:gap-20">
           <div className="flex-1">
             {/* STATUS */}
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-1.5">
-              <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-cyan-500">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-1.5 animate-pulse">
+              <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-cyan-500 ">
                 Available for hire
               </span>
-              <span className="h-1.5 w-1.5 rounded-full bg-cyan-500 animate-pulse" />
+              <span className="h-1.5 w-1.5 rounded-full bg-cyan-500" />
             </div>
 
 
             {/* DOT MATRIX NAME */}
-            <h1 className="mb-6 dot-matrix dot-matrix-lg">
+            <h1 className="mb-6 dot-matrix dot-matrix-lg ">
               {settings.name
                 .split(" ")
                 .reduce(

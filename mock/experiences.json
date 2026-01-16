@@ -81,26 +81,5 @@
       "Vue.js",
       "WordPress"
     ]
-  },
-  {
-    "id": "4",
-    "company": "Self-employed",
-    "position": "Freelance Web Developer",
-    "location": "Remote",
-    "startDate": "2018-01",
-    "isCurrent": false,
-    "description": "Delivered end-to-end web solutions for various clients, translating business workflows into scalable applications. Owned development, deployment, and CI/CD pipelines, while improving system performance, reliability, and long-term maintainability.",
-    "keyPoints": [
-      "Collaborated closely with clients to understand their technical workflows and deliver tailored, high-impact solutions.",
-      "Led end-to-end development of the application and implemented a CI/CD pipeline to enable seamless, zero-downtime deployments.",
-      "Identified and resolved critical system issues, improving performance, reliability, and overall feature scalability."
-    ],
-    "technologies": [
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "Vue.js",
-      "WordPress"
-    ]
   }
 ]
