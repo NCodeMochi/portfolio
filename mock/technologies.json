@@ -16,7 +16,13 @@
       "category": "frontend",
       "name": "TypeScript",
       "icon": "typescript",
-      "proficiency": "core"
+      "proficiency": "familiar"
+    },
+    {
+      "category": "backend",
+      "name": "Sonarqube",
+      "icon": "sonarqube",
+      "proficiency": "exploring"
     },
     {
       "category": "frontend",
@@ -91,9 +97,9 @@
       "proficiency": "familiar"
     },
     {
-      "category": "cloud",
-      "name": "Linode",
-      "icon": "linode",
+      "category": "backend",
+      "name": "Java",
+      "icon": "java",
       "proficiency": "core"
     },
     {
@@ -130,6 +136,12 @@
       "category": "backend",
       "name": "Kysely",
       "icon": "kysely",
+      "proficiency": "exploring"
+    },
+    {
+      "category": "backend",
+      "name": "Docker",
+      "icon": "docker",
       "proficiency": "core"
     },
     {

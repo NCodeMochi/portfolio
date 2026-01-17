@@ -2,7 +2,8 @@
 
 import { Code } from "lucide-react";
 import type React from "react";
-import { FaCloud, FaDatabase, FaDesktop, FaServer, FaWrench } from "react-icons/fa6";
+// Java is imported from fa6 (Font Awesome)
+import { FaCloud, FaDatabase, FaDesktop, FaServer, FaWrench, FaJava } from "react-icons/fa6";
 import {
   SiAdonisjs,
   SiAmazondynamodb,
@@ -32,6 +33,7 @@ import {
   SiTailwindcss,
   SiTypescript,
   SiWordpress,
+  SiSonarqube, // Sonarqube stays here
 } from "react-icons/si";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -68,6 +70,8 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   adonis: SiAdonisjs,
   svelte: SiSvelte,
   openai: SiOpenai,
+  java: FaJava, // Updated to use FaJava
+  sonarqube: SiSonarqube,
 };
 
 interface TechIconProps {

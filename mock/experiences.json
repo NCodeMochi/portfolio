@@ -19,16 +19,18 @@
         "Actively involved in migrating legacy databases to PostgreSQL and transitioning backend services from Java Spring Boot to Go (Golang) while continuing to enhance existing systems."
     ],
     "technologies": [
-      "TypeScript",
-      "Express.js",
-      "Node.js",
-      "Next.js",
-      "Tailwind",
-      "WordPress",
-      "Shopify",
-      "PostgreSQL",
+      "JavaScript",
+      "Spring Boot",
+      "JDBC",
+      "JPA",
+      "Spring tools",
+      "Golang",
+      "React.js",
+      "SSMS",
       "MySQL",
-      "Bitbucket"
+      "SonarQube",
+      "CSS",
+      "Git"
     ]
   },
   {
@@ -48,14 +50,7 @@
       "Applied best practices while operating within prescribed service and safety standards."
     ],
     "technologies": [
-      "React.js",
-      "Express.js",
-      "Node.js",
-      "Ant Design",
-      "MySQL",
-      "AWS Lambda",
-      "AWS DynamoDB",
-      "Git"
+ 
     ]
   },
    {
@@ -75,11 +70,6 @@
       "Debugged and resolved software issues to improve performance, security, and usability."
     ],
     "technologies": [
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "Vue.js",
-      "WordPress"
     ]
   }
 ]

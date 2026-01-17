@@ -12,7 +12,7 @@
       "Advanced product filtering and searching",
       "Dynamic tax and shipping calculations"
     ],
-    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop",
+    "image": "https://plus.unsplash.com/premium_photo-1722069799821-860b3129d252?q=80&w=2618&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "tags": [
       "Java 8.0",
       "SSMS",
@@ -24,33 +24,30 @@
   },
   {
     "id": "p2",
-    "title": "Fitness Tracker App",
+    "title": "APP",
     "category": "Mobile",
-    "date": "Oct 2024",
-    "description": "Mobile-first application designed to help users track workouts and monitor progress.",
-    "longDescription": "A fitness-focused application that leverages local database storage and cloud sync to provide a consistent tracking experience. It features high-quality charting to visualize user progress over time.",
+    "date": "",
+    "description": "",
+    "longDescription": "",
     "features": [
       "Workout log with custom exercise creation",
       "Interactive progress charts using D3.js",
       "Offline-first data architecture",
       "Cloud sync across multiple devices"
     ],
-    "image": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=2670&auto=format&fit=crop",
+    "image": "https://plus.unsplash.com/premium_photo-1722069799821-860b3129d252?q=80&w=2618&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "tags": [
-      "React Native",
-      "Firebase",
-      "D3.js",
-      "Zustand"
+
     ],
     "link": "#",
     "github": "#"
   },
   {
     "id": "p3",
-    "title": "AI Workflow Dashboard",
+    "title": "APP",
     "category": "Design",
-    "date": "Aug 2024",
-    "description": "A centralized hub for managing automated AI tasks and complex resource interfaces.",
+    "date": "",
+    "description": "",
     "longDescription": "Designed and developed a sophisticated dashboard for managing distributed AI workloads. The challenge was to make complex system logs and status indicators easy to digest for non-technical stakeholders.",
     "features": [
       "Visual task orchestration pipeline",
@@ -58,12 +55,8 @@
       "Configurable alert system",
       "Multi-tenant resource management"
     ],
-    "image": "https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=2670&auto=format&fit=crop",
+    "image": "https://plus.unsplash.com/premium_photo-1722069799821-860b3129d252?q=80&w=2618&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "tags": [
-      "React",
-      "Node.js",
-      "Tailwind",
-      "Python"
     ],
     "link": "#",
     "github": "#"
@@ -73,7 +66,7 @@
     "title": "Creative Studio CMS",
     "category": "Other",
     "date": "May 2024",
-    "description": "A bespoke content management system tailored for high-end creative agencies.",
+    "description": "",
     "longDescription": "A content-first CMS built to manage large video assets and complex portfolio layouts. It features a drag-and-drop editor and automated image optimization pipelines.",
     "features": [
       "Custom drag-and-drop page builder",
