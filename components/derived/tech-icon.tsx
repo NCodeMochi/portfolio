@@ -4,6 +4,8 @@ import { Code } from "lucide-react";
 import type React from "react";
 // Java is imported from fa6 (Font Awesome)
 import { FaCloud, FaDatabase, FaDesktop, FaServer, FaWrench, FaJava } from "react-icons/fa6";
+import { DiMsqlServer } from "react-icons/di"; // Reliable alternative for SQL Server/SSMS
+import { TbApi } from "react-icons/tb"; // Great generic icon for "API"
 import {
   SiAdonisjs,
   SiAmazondynamodb,
@@ -33,7 +35,9 @@ import {
   SiTailwindcss,
   SiTypescript,
   SiWordpress,
-  SiSonarqube, // Sonarqube stays here
+  SiSonarqube,
+  SiPostman,
+  SiFirebase,
 } from "react-icons/si";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -72,6 +76,11 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   openai: SiOpenai,
   java: FaJava, // Updated to use FaJava
   sonarqube: SiSonarqube,
+  ssms: DiMsqlServer,
+  restapi: TbApi,      // Clean "API" text icon
+  api: TbApi,
+  postman: SiPostman,
+  firebase: SiFirebase, // Firebase mapping
 };
 
 interface TechIconProps {

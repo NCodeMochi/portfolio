@@ -4,6 +4,9 @@ import { Zap } from "lucide-react";
 import { useMemo, useState } from "react";
 import { TechIcon } from "@/components/derived/tech-icon";
 import { technologies } from "@/mock/technologies.json";
+import { GlowIcon } from "@/components/ui/glow-icon";
+import { GlowPill } from "@/components/ui/glow-pill";
+
 
 export function TechnologiesSection() {
   const categories = [
@@ -93,6 +96,7 @@ export function TechnologiesSection() {
             if (groupTechs.length === 0) return null;
 
             return (
+
               <div key={group.key} className="py-8 first:pt-0">
                 <div className="flex items-start gap-4 mb-6">
                   <div
@@ -107,19 +111,24 @@ export function TechnologiesSection() {
                     <p className="text-sm text-zinc-500 font-medium dark:text-zinc-400">{group.description}</p>
                   </div>
                 </div>
-
                 <div className="flex flex-wrap gap-2.5 ml-9">
-                  {groupTechs.map((tech, index) => (
-                    <div
-                      key={index}
-                      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-50 border border-zinc-200 text-xs font-medium text-zinc-700 hover:border-zinc-900 hover:bg-white transition-all dark:bg-zinc-900 dark:border-zinc-800 dark:text-zinc-400 dark:hover:border-zinc-600 dark:hover:text-zinc-200"
-                    >
-                      <TechIcon icon={tech.icon} />
-                      {tech.name}
-                    </div>
-                  ))}
+                 {groupTechs.map((tech) => (
+  <GlowPill
+    key={tech.name}
+    // We set active to true so they all glow
+    active={true} 
+    // Pass the group key (core, familiar, or exploring) to set the color
+    type={group.key as "core" | "familiar" | "exploring"}
+  >
+    <div className="inline-flex items-center gap-2 px-4 py-2 text-xs font-medium text-zinc-100 whitespace-nowrap">
+      <TechIcon icon={tech.icon} />
+      <span>{tech.name}</span>
+    </div>
+  </GlowPill>
+))}
                 </div>
               </div>
+              
             );
           })}
         </div>

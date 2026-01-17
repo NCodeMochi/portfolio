@@ -20,6 +20,7 @@
     ],
     "technologies": [
       "JavaScript",
+      "Java 8.0",
       "Spring Boot",
       "JDBC",
       "JPA",
@@ -27,7 +28,7 @@
       "Golang",
       "React.js",
       "SSMS",
-      "MySQL",
+      "Postman",
       "SonarQube",
       "CSS",
       "Git"

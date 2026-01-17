@@ -46,7 +46,7 @@
       "category": "backend",
       "name": "Node.js",
       "icon": "node",
-      "proficiency": "core"
+      "proficiency": "familiar"
     },
     {
       "category": "backend",
@@ -94,7 +94,7 @@
       "category": "database",
       "name": "Redis",
       "icon": "redis",
-      "proficiency": "familiar"
+      "proficiency": "exploring"
     },
     {
       "category": "backend",
@@ -103,10 +103,10 @@
       "proficiency": "core"
     },
     {
-      "category": "cloud",
-      "name": "Docker",
-      "icon": "docker",
-      "proficiency": "familiar"
+      "category": "database",
+      "name": "Microsoft SQL",
+      "icon": "ssms",
+      "proficiency": "core"
     },
     {
       "category": "tools",
@@ -184,7 +184,7 @@
       "category": "backend",
       "name": "Adonis.js",
       "icon": "adonis",
-      "proficiency": "familiar"
+      "proficiency": "exploring"
     },
     {
       "category": "frontend",
@@ -197,6 +197,24 @@
       "name": "AI/ML",
       "icon": "openai",
       "proficiency": "exploring"
+    },
+    {
+      "category": "tools",
+      "name": "Postman",
+      "icon": "postman",
+      "proficiency": "core"
+    },
+    {
+      "category": "tools",
+      "name": "Firebase",
+      "icon": "firebase",
+      "proficiency": "core"
+    },
+       {
+      "category": "backend",
+      "name": "REST API",
+      "icon": "TbApi",
+      "proficiency": "core"
     }
   ]
 }

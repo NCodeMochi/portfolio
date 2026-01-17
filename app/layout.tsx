@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { Nunito, Nunito_Sans } from "next/font/google";
-import { Doto } from "next/font/google";
+import { Nunito, Nunito_Sans, Doto } from "next/font/google";
+import { ThemeProvider } from "next-themes"; // You may need to run: npm install next-themes
 
 import "./globals.css";
 
@@ -14,10 +14,15 @@ const nunitoMono = Nunito_Sans({
   subsets: ["latin"],
 });
 
+export const doto = Doto({
+  subsets: ["latin"],
+  weight: ["400", "700", "900"],
+});
+
 export const metadata: Metadata = {
   title: "Neil.dev | Portfolio",
   description:
-    "Professional web developer portfolio highlighting web apps, mobile applications, and modern UI/UX design. Browse projects and connect for freelance or contract work.",
+    "Professional web developer portfolio highlighting web apps, mobile applications, and modern UI/UX design.",
 };
 
 export default function RootLayout({
@@ -26,13 +31,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${nunitoSans.variable} ${nunitoMono.variable} antialiased`}>{children}</body>
+    // suppressHydrationWarning is required for next-themes to work without errors
+    <html lang="en" suppressHydrationWarning className="dark">
+      <body className={`${nunitoSans.variable} ${nunitoMono.variable} antialiased transition-colors duration-300`}>
+        <ThemeProvider 
+          attribute="class" 
+          defaultTheme="dark" 
+          enableSystem={true}
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
-
-export const doto = Doto({
-  subsets: ["latin"],
-  weight: ["400", "700", "900"],
-});

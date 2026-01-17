@@ -68,7 +68,10 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="mt-16 pt-8 border-t border-zinc-100 flex flex-col md:flex-row items-center justify-between gap-4 dark:border-zinc-900">
           <p className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-600">
-            © {new Date().getFullYear()} All Rights Reserved, Designed by Neil Irvine Morales.
+            © {new Date().getFullYear()} All Rights Reserved, Designed by{" "}
+            <span className="bg-gradient-to-r from-cyan-400 to-indigo-500 bg-clip-text text-transparent">
+              Neil Irvine Morales
+            </span>.
           </p>
           <div className="flex gap-6">
             <Link
