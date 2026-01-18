@@ -60,28 +60,5 @@
     ],
     "link": "#",
     "github": "#"
-  },
-  {
-    "id": "p4",
-    "title": "Creative Studio CMS",
-    "category": "Other",
-    "date": "May 2024",
-    "description": "",
-    "longDescription": "A content-first CMS built to manage large video assets and complex portfolio layouts. It features a drag-and-drop editor and automated image optimization pipelines.",
-    "features": [
-      "Custom drag-and-drop page builder",
-      "Automated asset optimization for web",
-      "Granular permission management",
-      "Multi-language content support"
-    ],
-    "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2670&auto=format&fit=crop",
-    "tags": [
-      "Vue.js",
-      "GraphQL",
-      "AWS S3",
-      "Redis"
-    ],
-    "link": "#",
-    "github": "#"
   }
 ]

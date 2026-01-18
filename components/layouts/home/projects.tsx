@@ -94,6 +94,7 @@ export function ProjectsSection() {
         <div className="mt-16 flex justify-center">
           <Link
             href="/projects"
+            scroll={true} // Forces the browser to scroll to the top of the new page
             className="group flex items-center gap-2 px-8 py-4 bg-zinc-900 text-white rounded-2xl font-bold text-sm transition-all hover:gap-4 hover:bg-indigo-600 active:scale-95 dark:bg-white dark:text-zinc-900"
           >
             View Full Gallery
