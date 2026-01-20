@@ -1,62 +1,86 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useState, useRef, useLayoutEffect } from "react";
 import { motion, useMotionValue, useSpring, useTransform, animate } from "framer-motion";
 import Image from "next/image";
-import { X } from "lucide-react";
+import { X, ArrowRight, Layers, ExternalLink } from "lucide-react";
 import projectss from "@/mock/projects.json";
 
 export function ProjectsSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [dimensions, setDimensions] = useState({ width: 0, cardWidth: 0, gap: 0 });
   
-  // The global 'x' that controls the cards
   const x = useMotionValue(0);
-  // Mass 1 and higher damping (40) removes the "wobble"
-  const springX = useSpring(x, { stiffness: 100, damping: 40, mass: 1 });
 
-  const CARD_WIDTH = 600;
-  const GAP = 60; 
-  const TOTAL_SLIDE_WIDTH = CARD_WIDTH + GAP;
+  useLayoutEffect(() => {
+    const updateDimensions = () => {
+      if (!containerRef.current) return;
+      const containerWidth = containerRef.current.offsetWidth;
+      const isMobile = containerWidth < 768;
+      
+      const cardW = isMobile ? Math.min(containerWidth * 0.85, 340) : 500;
+      const gapW = isMobile ? 30 : 60;
+      
+      setDimensions({ width: containerWidth, cardWidth: cardW, gap: gapW });
+      x.set(0);
+    };
+
+    updateDimensions();
+    window.addEventListener("resize", updateDimensions);
+    return () => window.removeEventListener("resize", updateDimensions);
+  }, [x]);
+
+  const TOTAL_SLIDE_WIDTH = dimensions.cardWidth + dimensions.gap;
   const FULL_TRACK_WIDTH = projectss.length * TOTAL_SLIDE_WIDTH;
 
-  // FIX: Use onPan or a controlled drag to prevent the "wiggle"
-  const handleDrag = (_: any, info: any) => {
-    // Stop any current animations so your finger has 1:1 control
-    x.stop();
-    // Use offset instead of delta for smoother tracking
-    x.set(x.get() + info.delta.x);
+  const handlePan = (_: any, info: any) => {
+    if (Math.abs(info.delta.x) > Math.abs(info.delta.y)) {
+      x.stop();
+      x.set(x.get() + info.delta.x);
+    }
   };
 
-  const handleDragEnd = (_: any, info: any) => {
+  const handlePanEnd = (_: any, info: any) => {
     const currentX = x.get();
-    // Velocity multiplier (0.3) for a more controlled "Wood Art" glide
-    const velocity = info.velocity.x * 0.3;
+    const velocity = info.velocity.x * 0.2;
     const projectedTarget = currentX + velocity;
-    
-    // Snap logic to ensure the card always lands perfectly centered
     const snappedTarget = Math.round(projectedTarget / TOTAL_SLIDE_WIDTH) * TOTAL_SLIDE_WIDTH;
 
     animate(x, snappedTarget, {
       type: "spring",
-      velocity: info.velocity.x,
       stiffness: 100,
-      damping: 40,
+      damping: 30,
     });
   };
 
   return (
-    <section className="bg-[#030303] py-20 overflow-hidden min-h-screen flex items-center justify-center relative select-none" id="projects">
-      <div className="relative w-full h-[850px] flex items-center justify-center overflow-hidden">
-        
-        {/* THE FIX: Remove dragConstraints and use 'onPan' or a raw motion div */}
+   <section 
+  ref={containerRef}
+  className="relative bg-transparent pt-0 pb-24 md:pb-32 overflow-hidden min-h-[600px] flex flex-col items-center justify-center select-none" 
+  id="projects"
+>
+      {/* --- HEADER --- */}
+      <div className="mb-16 text-center z-10 px-6">
+        <div className="inline-flex items-center gap-2 mb-4">
+          <span className="h-[1px] w-8 bg-cyan-500/50" />
+          <span className="font-inter text-cyan-400 text-xs uppercase tracking-[0.4em] font-bold">
+            Project_Archive
+          </span>
+          <span className="h-[1px] w-8 bg-cyan-500/50" />
+        </div>
+        <h2 className="font-forum text-5xl md:text-7xl text-white mt-2">Selected Work</h2>
+      </div>
+
+      <div className="relative w-full h-[550px] md:h-[720px] flex items-center justify-center overflow-hidden">
         <motion.div
-          onPan={handleDrag}
-          onPanEnd={handleDragEnd}
-          className="absolute inset-0 z-30 cursor-grab active:cursor-grabbing touch-none"
+          onPan={handlePan}
+          onPanEnd={handlePanEnd}
+          className="absolute inset-0 z-30 cursor-grab active:cursor-grabbing touch-pan-y"
         />
 
         <div className="relative w-full h-full pointer-events-none flex items-center justify-center">
-          {projectss.map((project, index) => (
+          {dimensions.cardWidth > 0 && projectss.map((project, index) => (
             <IndividualCard
               key={`${project.id}-${index}`}
               project={project}
@@ -64,16 +88,20 @@ export function ProjectsSection() {
               baseX={x} 
               totalWidth={FULL_TRACK_WIDTH}
               slideWidth={TOTAL_SLIDE_WIDTH}
+              cardWidth={dimensions.cardWidth}
               setSelectedImage={setSelectedImage}
             />
           ))}
         </div>
       </div>
 
-      {/* Lightbox remains the same */}
+      {/* --- LIGHTBOX --- */}
       {selectedImage && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-md" onClick={() => setSelectedImage(null)}>
-          <div className="relative w-full max-w-5xl aspect-video px-4" onClick={(e) => e.stopPropagation()}>
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-xl" onClick={() => setSelectedImage(null)}>
+          <button className="absolute top-6 right-6 text-cyan-400 hover:text-white transition-colors">
+            <X size={40} strokeWidth={1} />
+          </button>
+          <div className="relative w-[90vw] h-[80vh]" onClick={(e) => e.stopPropagation()}>
             <Image src={selectedImage} alt="Preview" fill className="object-contain" />
           </div>
         </div>
@@ -82,43 +110,65 @@ export function ProjectsSection() {
   );
 }
 
-function IndividualCard({ project, index, baseX, totalWidth, slideWidth, setSelectedImage }: any) {
+function IndividualCard({ project, index, baseX, totalWidth, slideWidth, cardWidth, setSelectedImage }: any) {
   const x = useTransform(baseX, (latest: number) => {
     const offset = index * slideWidth;
     let position = (latest + offset) % totalWidth;
-    
-    // Precision Wrapping: Ensures cards never "blink" out of existence
     if (position > totalWidth / 2) position -= totalWidth;
     if (position < -totalWidth / 2) position += totalWidth;
-    
     return position;
   });
 
-  const scale = useTransform(x, [-slideWidth, 0, slideWidth], [0.85, 1, 0.85]);
-  const opacity = useTransform(x, [-slideWidth * 1.5, -slideWidth, 0, slideWidth, slideWidth * 1.5], [0, 1, 1, 1, 0]);
-  const rotateY = useTransform(x, [-slideWidth, 0, slideWidth], [25, 0, -25]);
+  const scale = useTransform(x, [-slideWidth, 0, slideWidth], [0.8, 1, 0.8]);
+  const opacity = useTransform(x, [-slideWidth * 1.1, -slideWidth, 0, slideWidth, slideWidth * 1.1], [0, 0.4, 1, 0.4, 0]);
 
   return (
     <motion.div
-      style={{ x, scale, opacity, rotateY, perspective: 1200, width: 600, position: "absolute" }}
-      className="h-[750px] rounded-[24px] border border-[#352317] overflow-hidden bg-gradient-to-b from-[#FFA86A40] via-[#030303C4] to-[#030303] pointer-events-auto"
+      style={{ x, scale, opacity, width: cardWidth, position: "absolute", perspective: 1000 }}
+      className="h-[480px] md:h-[650px] rounded-sm border border-white/5 overflow-hidden bg-zinc-900/50 backdrop-blur-sm pointer-events-auto group shadow-2xl"
     >
-      <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[85%] aspect-square z-10">
-        <Image 
-          src={project.image} 
-          alt={project.title} 
-          fill 
-          draggable={false}
-          className="object-contain cursor-pointer"
-          onClick={() => setSelectedImage(project.image)}
-        />
+      {/* Corner HUD Accents */}
+      <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-cyan-500/30 group-hover:border-cyan-500 transition-colors" />
+      <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-cyan-500/30 group-hover:border-cyan-500 transition-colors" />
+
+      {/* Cyber Background Detail */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(6,182,212,0.1),transparent)]" />
+      <div className="absolute top-4 right-6 text-[10px] font-mono text-cyan-500/40 uppercase tracking-widest">
+        Idx_00{index + 1}
       </div>
-      <div className="absolute bottom-0 left-0 w-full p-12 text-center z-20">
-        <h3 className="font-serif text-[85px] text-[#fffdee] tracking-tighter leading-none mb-8">
+
+      <div className="absolute top-[12%] left-1/2 -translate-x-1/2 w-[85%] h-[48%] z-10">
+        <div className="relative h-full w-full">
+          <Image 
+            src={project.image} 
+            alt={project.title} 
+            fill 
+            draggable={false}
+            className="object-contain drop-shadow-[0_0_30px_rgba(6,182,212,0.3)] cursor-pointer grayscale group-hover:grayscale-0 transition-all duration-500"
+            onClick={() => setSelectedImage(project.image)}
+          />
+        </div>
+      </div>
+
+      <div className="absolute bottom-0 left-0 w-full p-8 md:p-12 text-center z-20">
+        <h3 className="font-forum text-[42px] md:text-[68px] text-white tracking-tighter leading-none mb-6 group-hover:text-cyan-400 transition-colors">
           {project.title}
         </h3>
-        <p className="font-sans text-[14px] font-bold text-[#FFA86A] uppercase tracking-[5px]">view gallery</p>
+        
+        <div className="flex items-center justify-center gap-3">
+          <span className="h-[1px] w-4 bg-zinc-700" />
+          <div className="flex items-center gap-2 text-cyan-500">
+            <span className="font-inter text-[10px] md:text-[11px] font-bold uppercase tracking-[0.3em]">
+              Access_Showcase
+            </span>
+            <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+          </div>
+          <span className="h-[1px] w-4 bg-zinc-700" />
+        </div>
       </div>
+
+      {/* Animated Scan Line on Hover */}
+      <div className="absolute inset-0 w-full h-[2px] bg-cyan-500/20 -translate-y-full group-hover:animate-scan pointer-events-none" />
     </motion.div>
   );
 }

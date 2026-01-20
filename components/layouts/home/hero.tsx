@@ -1,6 +1,9 @@
-import { ArrowRight, Download, Mail, MapPin } from "lucide-react";
+"use client";
+
+import { ArrowRight, Download, Mail, MapPin, Cpu, ShieldCheck, Terminal } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import {
   FaGithub as Github,
   FaLinkedin as Linkedin,
@@ -9,133 +12,152 @@ import {
 } from "react-icons/fa6";
 import settings from "@/mock/settings.json";
 
-
 export function HeroSection() {
   const socialLinks = [
     { url: settings.github, icon: Github, label: "GitHub" },
     { url: settings.linkedin, icon: Linkedin, label: "LinkedIn" },
-    { url: settings.twitter, icon: Twitter, label: "Twitter" }, // Add this line
+    { url: settings.twitter, icon: Twitter, label: "Twitter" },
     { url: settings.facebook, icon: Facebook, label: "Facebook" },
     { url: `mailto:${settings.email}`, icon: Mail, label: "Email" },
   ].filter((link) => link.url);
 
   return (
-    <section
-      className="relative flex min-h-[70vh] items-center bg-white overflow-hidden py-24 dark:bg-zinc-950 scroll-mt-20"
-      id="home"
-    >
-      {/* Subtle background detail */}
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden opacity-[0.03] dark:opacity-[0.02]">
-        <div className="absolute top-10 left-10 text-[20rem] font-black text-zinc-900 leading-none select-none dark:text-white">
-          N
-        </div>
+   <section
+  className="relative flex min-h-[70vh] md:min-h-[800px] items-center bg-transparent overflow-hidden pt-32 pb-16 lg:pt-20 lg:pb-0 scroll-mt-20"
+  id="home"
+>
+
+      {/* 3. The "Big N" Decal (moved to far right for better space usage) */}
+      <div className="absolute -right-20 top-1/2 -translate-y-1/2 pointer-events-none opacity-[0.02] select-none">
+        <span className="text-[40rem] font-black leading-none text-white">N</span>
       </div>
 
-      <div className="relative mx-auto max-w-4xl px-6">
-        <div className="flex flex-col items-start gap-12 lg:flex-row lg:items-center lg:gap-20">
-          <div className="flex-1">
-            {/* STATUS */}
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-1.5 animate-pulse">
-              <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-cyan-500 ">
-                Available for hire
+      <div className="container relative z-10 mx-auto px-6 lg:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          {/* --- LEFT CONTENT (Text & HUD) --- */}
+          <div className="lg:col-span-7 flex flex-col items-start">
+            
+            {/* HUD Status Bar */}
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="mb-8 flex items-center gap-3 rounded-md border border-cyan-500/30 bg-cyan-500/5 px-4 py-2"
+            >
+              <div className="relative h-2 w-2">
+                <span className="absolute inset-0 animate-ping rounded-full bg-cyan-400 opacity-75"></span>
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-500"></span>
+              </div>
+              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-cyan-400">
+                System Active // {settings.location}
               </span>
-              <span className="h-1.5 w-1.5 rounded-full bg-cyan-500" />
+            </motion.div>
+
+            {/* Main Name Header */}
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mb-6 dot-matrix dot-matrix-lg leading-[0.85] text-white"
+            >
+              {settings.name}
+            </motion.h1>
+
+            {/* Title with Scanning Line */}
+            <div className="relative mb-8 overflow-hidden">
+               <p className="text-2xl md:text-4xl font-bold text-white/90">
+                 {settings.title}<span className="text-cyan-500">_</span>
+               </p>
             </div>
 
-
-            {/* DOT MATRIX NAME */}
-            <h1 className="mb-6 dot-matrix dot-matrix-lg ">
-              {settings.name
-                .split(" ")
-                .reduce(
-                  (lines: string[][], word, index, arr) => {
-                    const half = Math.ceil(arr.length / 2);
-                    lines[index < half ? 0 : 1].push(word);
-                    return lines;
-                  },
-                  [[], []]
-                )
-                .map((line, index) => (
-                  <span key={index} className="block">
-                    {line.join(" ")}
-                  </span>
-                ))}
-            </h1>
-
-            {/* GRADIENT TITLE */}
-            <p className="mb-6 text-xl md:text-2xl font-semibold bg-gradient-to-r from-cyan-400 to-indigo-500 bg-clip-text text-transparent">
-              {settings.title}
-            </p>
-
-
-            {/* LOCATION */}
-            <div className="mb-8 flex flex-wrap items-center gap-4 text-sm font-medium text-zinc-500 dark:text-zinc-400">
-              <span className="flex items-center gap-1.5">
-                <MapPin className="h-4 w-4" />
-                {settings.location}
-              </span>
+            {/* Bio with HUD Accents */}
+            <div className="relative mb-10 max-w-2xl border-l-2 border-zinc-800 pl-6">
+              <p className="text-lg leading-relaxed text-zinc-400">
+                {settings.bio}
+              </p>
+              {/* Corner accent for bio */}
+              <div className="absolute top-0 right-0 h-2 w-2 border-t border-r border-zinc-700" />
             </div>
 
-            {/* BIO */}
-            <p className="mb-10 max-w-xl text-lg leading-relaxed font-medium text-zinc-500 dark:text-zinc-400">
-              {settings.bio}
-            </p>
-
-            {/* CTA */}
-            <div className="mb-12 flex flex-wrap gap-4">
+            {/* CTA Buttons */}
+            <div className="mb-12 flex flex-wrap gap-5">
               <Link
-                href="/projects"
-                className="group flex items-center gap-2 rounded-2xl bg-zinc-900 px-8 py-4 font-bold text-white transition-all hover:bg-zinc-800 active:scale-95 dark:bg-white dark:text-zinc-900"
+                href="#projects"
+                className="group relative flex items-center gap-3 overflow-hidden rounded-sm bg-cyan-600 px-8 py-4 font-bold text-black transition-all hover:bg-cyan-400"
               >
-                View My Projects
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                <span className="z-10 flex items-center gap-2">
+                  INITIATE PROJECTS <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </span>
+                <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-500 group-hover:translate-x-full" />
               </Link>
 
               {settings.resumeUrl && (
                 <Link
                   href={settings.resumeUrl}
                   target="_blank"
-                  className="flex items-center gap-2 rounded-2xl border border-zinc-200 px-8 py-4 font-bold text-zinc-900 transition-all hover:border-zinc-900 active:scale-95 dark:border-zinc-800 dark:text-white"
+                  className="flex items-center gap-3 rounded-sm border border-zinc-700 bg-zinc-900/50 px-8 py-4 font-bold text-white transition-all hover:border-cyan-500/50 hover:bg-zinc-800"
                 >
-                  <Download className="h-4 w-4" />
-                  Resume
+                  <Download className="h-4 w-4" /> DATA_LOG.PDF
                 </Link>
               )}
             </div>
 
-            {/* SOCIALS */}
-            {socialLinks.length > 0 && (
-              <div className="flex items-center gap-6">
-                {socialLinks.map((link) => (
-                  <Link
-                    key={link.label}
-                    href={link.url}
-                    target="_blank"
-                    aria-label={link.label}
-                    className="text-zinc-400 transition-all hover:-translate-y-0.5 hover:text-cyan-400 dark:hover:text-white"
-                  >
-                    <link.icon className="h-5 w-5" />
-                  </Link>
-                ))}
-              </div>
-            )}
+            {/* Social Links with Label HUD */}
+            <div className="flex flex-wrap items-center gap-8 border-t border-zinc-800 pt-8 w-full">
+              {socialLinks.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.url}
+                  target="_blank"
+                  className="group flex flex-col gap-1 text-zinc-500 transition-all hover:text-cyan-400"
+                >
+                  <span className="text-[10px] font-mono tracking-tighter opacity-50 group-hover:opacity-100">[{link.label}]</span>
+                  <link.icon className="h-6 w-6" />
+                </Link>
+              ))}
+            </div>
           </div>
 
-          {/* AVATAR */}
-          {settings.avatarUrl && (
-            <div className="relative hidden shrink-0 lg:block">
-              <div className="relative h-92 w-64 overflow-hidden rounded-3xl border border-zinc-100 bg-zinc-50 p-2 shadow-inner dark:border-zinc-800 dark:bg-zinc-900">
+          {/* --- RIGHT CONTENT (Cyber Avatar Frame) --- */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="lg:col-span-5 relative flex justify-center lg:justify-end"
+          >
+            {/* Floating Info Boxes (utilizing space around avatar) */}
+            <div className="absolute top-10 -left-10 z-20 hidden xl:flex flex-col gap-2 rounded-md border border-zinc-800 bg-zinc-950/80 p-3 backdrop-blur-sm">
+               <div className="flex items-center gap-2 text-cyan-500"><Cpu size={14} /> <span className="text-[10px] font-bold">FULL STACK CORE</span></div>
+               <div className="h-1 w-full bg-zinc-800 rounded-full overflow-hidden">
+                 <motion.div animate={{ width: ["0%", "90%"] }} transition={{ duration: 2 }} className="h-full bg-cyan-500" />
+               </div>
+            </div>
+
+            <div className="absolute bottom-10 -right-5 z-20 hidden xl:flex items-center gap-3 rounded-md border border-zinc-800 bg-zinc-950/80 p-3 backdrop-blur-sm">
+               <ShieldCheck size={18} className="text-emerald-500" />
+               <div className="flex flex-col">
+                  <span className="text-[10px] text-zinc-500 font-bold uppercase">Verification</span>
+                  <span className="text-[10px] text-white font-mono">SECURE_DEV_V2.0</span>
+               </div>
+            </div>
+
+            {/* The Avatar Container */}
+            <div className="relative group">
+              {/* Animated Corner Brackets */}
+              <div className="absolute -top-4 -left-4 h-12 w-12 border-t-2 border-l-2 border-cyan-500 transition-all group-hover:-top-2 group-hover:-left-2" />
+              <div className="absolute -bottom-4 -right-4 h-12 w-12 border-b-2 border-r-2 border-cyan-500 transition-all group-hover:-bottom-2 group-hover:-right-2" />
+
+              <div className="relative h-[450px] w-[320px] overflow-hidden bg-zinc-900 border border-zinc-800">
                 <Image
                   src={settings.avatarUrl}
                   alt={settings.name}
-                  width={256}
-                  height={256}
-                  className="h-full w-full rounded-2xl object-cover grayscale transition-all duration-700 hover:grayscale-0"
+                  fill
+                  className="object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
                 />
+                {/* Scanning Light Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/10 to-transparent h-1/2 w-full animate-scan pointer-events-none" />
               </div>
-              <div className="absolute -bottom-6 -right-6 -z-10 h-32 w-32 border-b border-r border-zinc-100 dark:border-zinc-900" />
             </div>
-          )}
+          </motion.div>
+
         </div>
       </div>
     </section>

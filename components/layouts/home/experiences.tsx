@@ -105,29 +105,51 @@ const ExperienceCard: React.FC<{ exp: (typeof experiences)[number]; isLast: bool
 
 export function WorkExperienceSection() {
   return (
-    <section className="relative bg-white py-20 md:py-28 scroll-mt-20 dark:bg-zinc-950" id="experience">
-      <div className="relative mx-auto max-w-4xl px-6">
-        <div className="mb-16">
-          <div className="flex items-center gap-2 mb-3">
-            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-600">
-              Experience
-            </span>
-          </div>
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-zinc-900 mb-6 dark:text-white">
-            Where I've contributed.
-          </h2>
-          <p className="text-zinc-500 max-w-md text-sm font-medium leading-relaxed dark:text-zinc-400">
-            A history of my professional work, focusing on building high-quality, performant, and accessible user
-            interfaces.
-          </p>
-        </div>
+  <section 
+    className="relative bg-transparent py-20 md:py-28 scroll-mt-20 overflow-hidden" 
+    id="experience"
+  >
+    {/* Decorative Section Label for the side */}
+    <div className="absolute left-0 top-1/2 -rotate-90 origin-left hidden xl:block opacity-20 pointer-events-none">
+      <span className="text-[10px] font-mono tracking-[1em] text-cyan-500 uppercase">
+        History_v2.0
+      </span>
+    </div>
 
-        <div className="relative">
-          {experiences.map((exp, index) => (
-            <ExperienceCard key={exp.id} exp={exp} isLast={index === experiences.length - 1} />
-          ))}
+    <div className="relative mx-auto max-w-4xl px-6 z-10">
+      <div className="mb-16">
+        <div className="flex items-center gap-3 mb-3">
+          {/* Cyan HUD Marker */}
+          <div className="h-[2px] w-8 bg-cyan-500/50" />
+          <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-cyan-500/80 font-mono">
+            System.Career_Path
+          </span>
         </div>
+        
+        <h2 className="text-3xl md:text-5xl font-bold tracking-tighter text-white mb-6">
+          Professional <span className="text-zinc-500">Timeline.</span>
+        </h2>
+        
+        <p className="text-zinc-400 max-w-md text-base leading-relaxed border-l border-zinc-800 pl-6">
+          A history of my professional work, focusing on building high-quality, 
+          performant, and secure digital architectures.
+        </p>
       </div>
-    </section>
-  );
+
+      {/* The Timeline Container */}
+      <div className="relative">
+        {/* Subtle vertical line connecting the cards */}
+        <div className="absolute left-0 top-0 h-full w-[1px] bg-gradient-to-b from-cyan-500/50 via-zinc-800 to-transparent ml-[-1px] hidden md:block" />
+        
+        {experiences.map((exp, index) => (
+          <ExperienceCard 
+            key={exp.id} 
+            exp={exp} 
+            isLast={index === experiences.length - 1} 
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+);
 }

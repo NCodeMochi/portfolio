@@ -1,12 +1,10 @@
 "use client";
 
-import { Zap } from "lucide-react";
+import { Zap, Cpu } from "lucide-react";
 import { useMemo, useState } from "react";
 import { TechIcon } from "@/components/derived/tech-icon";
 import { technologies } from "@/mock/technologies.json";
-import { GlowIcon } from "@/components/ui/glow-icon";
 import { GlowPill } from "@/components/ui/glow-pill";
-
 
 export function TechnologiesSection() {
   const categories = [
@@ -47,27 +45,29 @@ export function TechnologiesSection() {
   }, [selectedCategories]);
 
   return (
-    <section className="relative bg-white py-20 md:py-28 dark:bg-zinc-950 scroll-mt-20">
-      <div className="relative mx-auto max-w-4xl px-6">
+    <section className="relative bg-transparent py-20 md:py-28 scroll-mt-20 overflow-hidden" id="technologies">
+      <div className="relative mx-auto max-w-4xl px-6 z-10">
+        
         {/* Section Header */}
         <div className="mb-16">
-          <div className="flex items-center gap-2 mb-3">
-            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-600">
-              Stack
+          <div className="flex items-center gap-3 mb-3">
+            <div className="h-[2px] w-8 bg-cyan-500/50" />
+            <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-cyan-500/80 font-mono">
+              System.Stack_Registry
             </span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-zinc-900 mb-6 dark:text-white">
-            Technologies I use.
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tighter text-white mb-6 leading-[0.9]">
+            Technical <span className="text-zinc-500">Arsenal.</span>
           </h2>
-          <p className="text-zinc-500 max-w-md text-sm font-medium leading-relaxed dark:text-zinc-400">
+          <p className="text-zinc-400 max-w-md text-base leading-relaxed border-l border-zinc-800 pl-6">
             A specialized collection of tools and frameworks I leverage to create efficient, high-end digital
-            experiences.
+            architectures.
           </p>
         </div>
 
-        {/* Categories Filter */}
+        {/* Categories Filter - Updated for Cyber Look */}
         <div className="mb-12 overflow-x-auto no-scrollbar">
-          <div className="flex gap-2 min-w-max pb-4">
+          <div className="flex gap-3 min-w-max pb-4">
             {categories.map((category) => {
               const isActive = selectedCategories.includes(category.key);
               return (
@@ -75,13 +75,13 @@ export function TechnologiesSection() {
                   type="button"
                   key={category.key}
                   onClick={() => toggleCategory(category.key)}
-                  className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-semibold transition-all border ${
+                  className={`flex items-center gap-2 px-4 py-2 rounded-sm text-[10px] font-mono uppercase tracking-widest transition-all border ${
                     isActive
-                      ? "bg-zinc-900 border-zinc-900 text-white shadow-sm dark:bg-white dark:border-white dark:text-zinc-900"
-                      : "bg-white border-zinc-200 text-zinc-500 hover:border-zinc-400 hover:text-zinc-900 dark:bg-zinc-900 dark:border-zinc-800 dark:text-zinc-400 dark:hover:border-zinc-600 dark:hover:text-zinc-200"
+                      ? "bg-cyan-500/10 border-cyan-500 text-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.2)]"
+                      : "bg-zinc-900/50 border-zinc-800 text-zinc-500 hover:border-zinc-700 hover:text-zinc-300"
                   }`}
                 >
-                  <TechIcon icon={category.key} />
+                  <TechIcon icon={category.key} className={isActive ? "text-cyan-400" : "text-zinc-500"} />
                   {category.label}
                 </button>
               );
@@ -90,45 +90,42 @@ export function TechnologiesSection() {
         </div>
 
         {/* Proficiency Groups */}
-        <div className="space-y-4 divide-y divide-zinc-100 dark:divide-zinc-900">
+        <div className="space-y-8">
           {proficiencyGroups.map((group) => {
             const groupTechs = filteredTechnologies.filter((t) => t.proficiency === group.key);
             if (groupTechs.length === 0) return null;
 
             return (
-
-              <div key={group.key} className="py-8 first:pt-0">
+              <div key={group.key} className="relative py-8 first:pt-0 border-t border-zinc-900 first:border-none">
                 <div className="flex items-start gap-4 mb-6">
                   <div
                     className={`mt-1 shrink-0 transition-colors ${
-                      group.key === "core" ? "text-zinc-900 dark:text-white" : "text-zinc-300 dark:text-zinc-700"
+                      group.key === "core" ? "text-cyan-500" : "text-zinc-700"
                     }`}
                   >
-                    <Zap className="w-5 h-5 fill-current" />
+                    <Cpu className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-bold text-zinc-900 dark:text-zinc-100">{group.label}</h4>
-                    <p className="text-sm text-zinc-500 font-medium dark:text-zinc-400">{group.description}</p>
+                    <h4 className="text-lg font-bold text-white font-mono uppercase tracking-tight">{group.label}</h4>
+                    <p className="text-sm text-zinc-500 font-medium">{group.description}</p>
                   </div>
                 </div>
-                <div className="flex flex-wrap gap-2.5 ml-9">
-                 {groupTechs.map((tech) => (
-  <GlowPill
-    key={tech.name}
-    // We set active to true so they all glow
-    active={true} 
-    // Pass the group key (core, familiar, or exploring) to set the color
-    type={group.key as "core" | "familiar" | "exploring"}
-  >
-    <div className="inline-flex items-center gap-2 px-4 py-2 text-xs font-medium text-zinc-100 whitespace-nowrap">
-      <TechIcon icon={tech.icon} />
-      <span>{tech.name}</span>
-    </div>
-  </GlowPill>
-))}
+                
+                <div className="flex flex-wrap gap-3 ml-9">
+                  {groupTechs.map((tech) => (
+                    <GlowPill
+                      key={tech.name}
+                      active={true} 
+                      type={group.key as "core" | "familiar" | "exploring"}
+                    >
+                      <div className="inline-flex items-center gap-2 px-4 py-2 text-xs font-mono text-zinc-100 whitespace-nowrap">
+                        <TechIcon icon={tech.icon} />
+                        <span>{tech.name}</span>
+                      </div>
+                    </GlowPill>
+                  ))}
                 </div>
               </div>
-              
             );
           })}
         </div>

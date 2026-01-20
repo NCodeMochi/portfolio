@@ -1,27 +1,15 @@
-
 @import "tailwindcss";
 @import "tw-animate-css";
 
-
-html {
-  scroll-behavior: smooth;
-}
-.dot-matrix {
-  font-family: "Doto", monospace;
-  letter-spacing: 0.25em;
-  line-height: 0.95;
-  text-transform: uppercase;
-}
-
-.dot-matrix-lg {
-  font-size: clamp(2.8rem, 7vw, 5rem);
-}
-
-@custom-variant dark (&:is(.dark *));
-
 @theme {
+  /* Font Variable Mappings */
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
+  --font-doto: var(--font-doto);
+  --font-forum: var(--font-forum);
+  --font-inter: var(--font-inter);
+
+  /* Color Variables */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -53,6 +41,8 @@ html {
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+
+  /* Radius */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -62,12 +52,31 @@ html {
   --radius-4xl: calc(var(--radius) + 16px);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+.dot-matrix {
+  font-family: var(--font-doto), monospace;
+  letter-spacing: 0.25em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.dot-matrix-lg {
+  font-size: clamp(2.8rem, 7vw, 5rem);
+}
+
+@custom-variant dark (&:is(.dark *));
+
 #home, #projects, #experience, #contact {
   scroll-margin-top: 80px;
 }
 
 :root {
   --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(24.776% 0.00003 271.152);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
@@ -97,8 +106,6 @@ html {
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  --background: oklch(1 0 0);
-  --foreground: oklch(24.776% 0.00003 271.152);
 }
 
 .dark {
@@ -143,8 +150,37 @@ html {
     @apply bg-background text-foreground;
   }
 }
+
 @layer utilities {
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 }
-@import url('https://fonts.googleapis.com/css2?family=Forum&family=Inter:wght@400;600&display=swap');
+@keyframes scan {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(100%); }
+}
+
+.animate-scan {
+  animation: scan 10s linear infinite;
+}
+@keyframes cyber-glow {
+  0%, 100% { opacity: 0.8; text-shadow: 0 0 8px rgba(6, 182, 212, 0.4); }
+  50% { opacity: 1; text-shadow: 0 0 12px rgba(6, 182, 212, 0.8); }
+}
+
+.animate-cyber-glow {
+  animation: cyber-glow 2s ease-in-out infinite;
+}
+@keyframes cyber-glitch {
+  0% { transform: translate(0); text-shadow: 0 0 8px rgba(6, 182, 212, 0.4); }
+  20% { transform: translate(-1px, 1px); text-shadow: 2px 0 red, -2px 0 cyan; }
+  40% { transform: translate(-1px, -1px); text-shadow: -2px 0 red, 2px 0 cyan; }
+  60% { transform: translate(1px, 1px); }
+  80% { transform: translate(1px, -1px); text-shadow: 2px 0 red, -2px 0 cyan; }
+  100% { transform: translate(0); text-shadow: 0 0 8px rgba(6, 182, 212, 0.4); }
+}
+
+.animate-cyber-glitch {
+  display: inline-block;
+  animation: cyber-glitch 3s step-end infinite;
+}
