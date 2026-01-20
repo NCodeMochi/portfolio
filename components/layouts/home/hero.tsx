@@ -4,6 +4,7 @@ import Link from "next/link";
 import {
   FaGithub as Github,
   FaLinkedin as Linkedin,
+  FaXTwitter as Twitter,
   FaFacebook as Facebook
 } from "react-icons/fa6";
 import settings from "@/mock/settings.json";
@@ -13,6 +14,7 @@ export function HeroSection() {
   const socialLinks = [
     { url: settings.github, icon: Github, label: "GitHub" },
     { url: settings.linkedin, icon: Linkedin, label: "LinkedIn" },
+    { url: settings.twitter, icon: Twitter, label: "Twitter" }, // Add this line
     { url: settings.facebook, icon: Facebook, label: "Facebook" },
     { url: `mailto:${settings.email}`, icon: Mail, label: "Email" },
   ].filter((link) => link.url);

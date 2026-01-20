@@ -143,3 +143,8 @@ html {
     @apply bg-background text-foreground;
   }
 }
+@layer utilities {
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+}
+@import url('https://fonts.googleapis.com/css2?family=Forum&family=Inter:wght@400;600&display=swap');

@@ -1,107 +1,124 @@
 "use client";
 
-import { useState } from "react";
-import { ArrowRight, Globe, Github, X, Maximize2 } from "lucide-react";
+import { useRef, useState } from "react";
+import { motion, useMotionValue, useSpring, useTransform, animate } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
+import { X } from "lucide-react";
 import projectss from "@/mock/projects.json";
 
 export function ProjectsSection() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const projects = projectss.slice(0, 6);
+  
+  // The global 'x' that controls the cards
+  const x = useMotionValue(0);
+  // Mass 1 and higher damping (40) removes the "wobble"
+  const springX = useSpring(x, { stiffness: 100, damping: 40, mass: 1 });
+
+  const CARD_WIDTH = 600;
+  const GAP = 60; 
+  const TOTAL_SLIDE_WIDTH = CARD_WIDTH + GAP;
+  const FULL_TRACK_WIDTH = projectss.length * TOTAL_SLIDE_WIDTH;
+
+  // FIX: Use onPan or a controlled drag to prevent the "wiggle"
+  const handleDrag = (_: any, info: any) => {
+    // Stop any current animations so your finger has 1:1 control
+    x.stop();
+    // Use offset instead of delta for smoother tracking
+    x.set(x.get() + info.delta.x);
+  };
+
+  const handleDragEnd = (_: any, info: any) => {
+    const currentX = x.get();
+    // Velocity multiplier (0.3) for a more controlled "Wood Art" glide
+    const velocity = info.velocity.x * 0.3;
+    const projectedTarget = currentX + velocity;
+    
+    // Snap logic to ensure the card always lands perfectly centered
+    const snappedTarget = Math.round(projectedTarget / TOTAL_SLIDE_WIDTH) * TOTAL_SLIDE_WIDTH;
+
+    animate(x, snappedTarget, {
+      type: "spring",
+      velocity: info.velocity.x,
+      stiffness: 100,
+      damping: 40,
+    });
+  };
 
   return (
-    <section className="relative bg-white py-20 md:py-32 dark:bg-zinc-950 scroll-mt-20" id="projects">
-      {/* --- Lightbox Modal --- */}
-      {selectedImage && (
-        <div 
-          className="fixed inset-0 z-[999] flex items-center justify-center bg-zinc-950/90 backdrop-blur-md p-4 animate-in fade-in duration-300"
-          onClick={() => setSelectedImage(null)}
-        >
-          <button className="absolute top-6 right-6 p-3 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors">
-            <X className="w-6 h-6" />
-          </button>
-          <div 
-            className="relative w-full max-w-5xl aspect-video rounded-2xl overflow-hidden shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Image
-              src={selectedImage}
-              alt="Preview"
-              fill
-              className="object-contain"
+    <section className="bg-[#030303] py-20 overflow-hidden min-h-screen flex items-center justify-center relative select-none" id="projects">
+      <div className="relative w-full h-[850px] flex items-center justify-center overflow-hidden">
+        
+        {/* THE FIX: Remove dragConstraints and use 'onPan' or a raw motion div */}
+        <motion.div
+          onPan={handleDrag}
+          onPanEnd={handleDragEnd}
+          className="absolute inset-0 z-30 cursor-grab active:cursor-grabbing touch-none"
+        />
+
+        <div className="relative w-full h-full pointer-events-none flex items-center justify-center">
+          {projectss.map((project, index) => (
+            <IndividualCard
+              key={`${project.id}-${index}`}
+              project={project}
+              index={index}
+              baseX={x} 
+              totalWidth={FULL_TRACK_WIDTH}
+              slideWidth={TOTAL_SLIDE_WIDTH}
+              setSelectedImage={setSelectedImage}
             />
+          ))}
+        </div>
+      </div>
+
+      {/* Lightbox remains the same */}
+      {selectedImage && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-md" onClick={() => setSelectedImage(null)}>
+          <div className="relative w-full max-w-5xl aspect-video px-4" onClick={(e) => e.stopPropagation()}>
+            <Image src={selectedImage} alt="Preview" fill className="object-contain" />
           </div>
         </div>
       )}
-
-      <div className="relative mx-auto max-w-6xl px-6">
-        <div className="mb-16 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-zinc-900 dark:text-white mb-4">
-            My Work
-          </h2>
-          <p className="text-zinc-500 dark:text-zinc-400 font-medium">
-            A collection of projects I've worked on.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <div
-              key={project.id}
-              style={{ animationDelay: `${index * 100}ms` }}
-              className="group flex flex-col bg-white border border-zinc-100 rounded-[2rem] overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-indigo-500/10 hover:-translate-y-2 dark:bg-zinc-900/40 dark:border-zinc-800/50 animate-in fade-in slide-in-from-bottom-4"
-            >
-              {/* Image Section - Clicking this opens Lightbox */}
-              <div 
-                className="relative aspect-video overflow-hidden bg-zinc-50 dark:bg-zinc-800 border-b border-zinc-100 dark:border-zinc-800/50 cursor-zoom-in"
-                onClick={() => setSelectedImage(project.image)}
-              >
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
-                  width={600}
-                  height={400}
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-                  <Maximize2 className="text-white opacity-0 group-hover:opacity-100 transition-opacity w-8 h-8" />
-                </div>
-              </div>
-
-              <div className="p-8 flex flex-col flex-1">
-                <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">
-                  {project.title}
-                </h3>
-                <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed mb-6 line-clamp-4 flex-1">
-                  {project.description}
-                </p>
-
-                {/* Footer Icons - Functional Links */}
-                <div className="flex items-center gap-4 pt-4 border-t border-zinc-50 dark:border-zinc-800/50">
-                  <Link href="/projects" className="text-zinc-400 hover:text-indigo-600 transition-colors">
-                    <Globe className="w-5 h-5" />
-                  </Link>
-                  <Link href="/projects" className="text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
-                    <Github className="w-5 h-5" />
-                  </Link>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-16 flex justify-center">
-          <Link
-            href="/projects"
-            scroll={true} // Forces the browser to scroll to the top of the new page
-            className="group flex items-center gap-2 px-8 py-4 bg-zinc-900 text-white rounded-2xl font-bold text-sm transition-all hover:gap-4 hover:bg-indigo-600 active:scale-95 dark:bg-white dark:text-zinc-900"
-          >
-            View Full Gallery
-            <ArrowRight className="w-4 h-4 transition-transform" />
-          </Link>
-        </div>
-      </div>
     </section>
+  );
+}
+
+function IndividualCard({ project, index, baseX, totalWidth, slideWidth, setSelectedImage }: any) {
+  const x = useTransform(baseX, (latest: number) => {
+    const offset = index * slideWidth;
+    let position = (latest + offset) % totalWidth;
+    
+    // Precision Wrapping: Ensures cards never "blink" out of existence
+    if (position > totalWidth / 2) position -= totalWidth;
+    if (position < -totalWidth / 2) position += totalWidth;
+    
+    return position;
+  });
+
+  const scale = useTransform(x, [-slideWidth, 0, slideWidth], [0.85, 1, 0.85]);
+  const opacity = useTransform(x, [-slideWidth * 1.5, -slideWidth, 0, slideWidth, slideWidth * 1.5], [0, 1, 1, 1, 0]);
+  const rotateY = useTransform(x, [-slideWidth, 0, slideWidth], [25, 0, -25]);
+
+  return (
+    <motion.div
+      style={{ x, scale, opacity, rotateY, perspective: 1200, width: 600, position: "absolute" }}
+      className="h-[750px] rounded-[24px] border border-[#352317] overflow-hidden bg-gradient-to-b from-[#FFA86A40] via-[#030303C4] to-[#030303] pointer-events-auto"
+    >
+      <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[85%] aspect-square z-10">
+        <Image 
+          src={project.image} 
+          alt={project.title} 
+          fill 
+          draggable={false}
+          className="object-contain cursor-pointer"
+          onClick={() => setSelectedImage(project.image)}
+        />
+      </div>
+      <div className="absolute bottom-0 left-0 w-full p-12 text-center z-20">
+        <h3 className="font-serif text-[85px] text-[#fffdee] tracking-tighter leading-none mb-8">
+          {project.title}
+        </h3>
+        <p className="font-sans text-[14px] font-bold text-[#FFA86A] uppercase tracking-[5px]">view gallery</p>
+      </div>
+    </motion.div>
   );
 }

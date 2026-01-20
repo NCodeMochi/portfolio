@@ -60,5 +60,24 @@
     ],
     "link": "#",
     "github": "#"
+  },
+{
+    "id": "p4",
+    "title": "APP",
+    "category": "Design",
+    "date": "",
+    "description": "",
+    "longDescription": "Designed and developed a sophisticated dashboard for managing distributed AI workloads. The challenge was to make complex system logs and status indicators easy to digest for non-technical stakeholders.",
+    "features": [
+      "Visual task orchestration pipeline",
+      "Real-time status monitoring via WebSockets",
+      "Configurable alert system",
+      "Multi-tenant resource management"
+    ],
+    "image": "https://plus.unsplash.com/premium_photo-1722069799821-860b3129d252?q=80&w=2618&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "tags": [
+    ],
+    "link": "#",
+    "github": "#"
   }
 ]
